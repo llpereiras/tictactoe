@@ -12,16 +12,16 @@ class Tictactoe
 
     @board.choose_level
     until @level
-      puts check_valid_input
-      if check_valid_input == 1
+      input = check_valid_input
+      if input == 1
         @level = Easy.new
       end
 
-      if check_valid_input == 2
+      if input == 2
         @level = Normal.new
       end
       
-      if check_valid_input == 3
+      if input == 3
         @level = Hard.new
       end
     end
