@@ -1,26 +1,22 @@
 require_relative "level"
 
-class Normal
+class Hard
   
   include Level
+  include Rules
 
   def get_best_move(board, next_player)
-    available_spaces = []
+    spaces = get_available_spaces(board)
     best_move = nil
-    board.each do |s|
-      if s != "X" && s != "O"
-        available_spaces << s
-      end
-    end
-    available_spaces.each do |as|
-      board[as.to_i] = @com
-      if game_is_over(board)
+    spaces.each do |as|
+      board[as.to_i] = next_player
+      if get_game_over(board)
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
         board[as.to_i] = @hum
-        if game_is_over(board)
+        if get_game_over(board)
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
@@ -32,8 +28,8 @@ class Normal
     if best_move
       return best_move
     else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
+      n = rand(0..spaces.count)
+      return spaces[n].to_i
     end
   end
 end
