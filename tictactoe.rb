@@ -5,6 +5,8 @@ class Tictactoe
     @board = Board.new()
     @com = "X" # the computer's marker
     @hum = "O" # the user's marker
+    @board.set_player_one(@hum)
+    @board.set_player_two(@com)
     @level = nil
   end
 
@@ -60,7 +62,7 @@ class Tictactoe
         spot = 4
         @board.set(spot, @com)
       else
-        spot = @level.get_best_move(@board.status, @com)
+        spot = @level.get_best_move(@board, @com)
         if @board.status[spot] != "X" && @board.status[spot] != "O"
           @board.set(spot, @com)
         else
@@ -79,7 +81,8 @@ class Tictactoe
   end
 
   def check_valid_input
-    spot = gets.chomp
+    # spot = gets.chomp
+    spot = STDIN.gets.chomp
     if valid_input?(spot)
       return spot.to_i
     end

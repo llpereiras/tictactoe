@@ -7,6 +7,8 @@ require_relative "colorize"
 class Board
   include Rules
 
+  attr_reader :player_one, :player_two
+
   @board = []
 
   def initialize
@@ -15,6 +17,14 @@ class Board
 
   def status
     @board
+  end
+
+  def set_player_one(player_one)
+    @player_one = player_one
+  end
+
+  def set_player_two(player_two)
+    @player_two = player_two
   end
 
   def print_board
