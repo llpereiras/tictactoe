@@ -11,11 +11,17 @@ module Rules
     [b[2], b[4], b[6]].uniq.length == 1
   end
 
-  def get_the_winner(b)
-    column = get_the_colums_winner(b)
+  def get_the_winner
+    column = get_the_colums_winner(self.status)
+    x_winner = 'You loose. Try again!'
+    o_winner = 'Congratulation!!! You Win.'
+    if self.mode.class == PlayerPlayer
+      o_winner = "The player #{Colorize.print(self.player_one) } is the Winner"
+      x_winner = "The player #{Colorize.print(self.player_one) } is the Winner"
+    end
     return 'Draw Game' unless column
-    return "You loose. Try again!" if column == 'X'
-    return "Congratulation!!! You Win." if column == 'O'
+    return x_winner if column == 'X'
+    return o_winner if column == 'O'
   end
 
   private

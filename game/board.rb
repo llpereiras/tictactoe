@@ -1,13 +1,7 @@
-require_relative "rules"
-require_relative "easy"
-require_relative "normal"
-require_relative "hard"
-require_relative "colorize"
-
 class Board
   include Rules
 
-  attr_reader :player_one, :player_two
+  attr_reader :player_one, :player_two, :mode
 
   @board = []
 
@@ -27,9 +21,16 @@ class Board
     @player_two = player_two
   end
 
+  def set_mode(mode)
+    @mode = mode
+  end
+
   def print_board
-    #Gem.win_platform? ? (system "cls") : (system "clear")
     puts get
+  end
+
+  def clear_board
+    Gem.win_platform? ? (system "cls") : (system "clear")
   end
 
   def set(position, value)
@@ -39,6 +40,17 @@ class Board
   def choose_level
     puts "Choose the level of you game."
     puts "Enter: \n 1 - Easy \n 2 - Normal \n 3 - Hard \n"
+  end
+
+  def choose_mode
+    puts "Choose the mode of you game."
+    puts "Enter: \n 1 - Player X Cpu \n 2 - Player X Player \n 3 - Cpu X Cpu \n"
+  end
+
+  def get_available_spaces
+    available_spaces = []
+    status.each {|s| available_spaces << s if s != "X" && s != "O" }
+    available_spaces
   end
 
   private 

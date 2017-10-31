@@ -1,11 +1,7 @@
-require_relative "level"
-
 class Easy
   
-  include Level
-
   def get_best_move(board, next_player)
-    spaces = get_available_spaces(board.status)
+    spaces = board.get_available_spaces
     return spaces.first.to_i
   end
   

@@ -1,18 +1,35 @@
-require_relative "board"
+require_relative "boot"
 
 class Tictactoe
+
+  include ValidInput
+
   def initialize
     @board = Board.new()
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
-    @board.set_player_one(@hum)
-    @board.set_player_two(@com)
-    @level = nil
+    @board.set_player_one('O')
+    @board.set_player_two('X')
   end
 
   def start_game
 
-    @board.choose_level
+    @board.choose_mode
+
+    until @mode
+      input = check_valid_input
+
+      case input
+      when 1
+        @mode = PlayerCpu.new
+      when 2
+        @mode = PlayerPlayer.new
+        @level = Easy.new
+      when 3
+        @mode = CpuCpu.new
+      end
+
+    end
+
+    @board.choose_level unless @level
     until @level
       input = check_valid_input
       if input == 1
@@ -28,70 +45,13 @@ class Tictactoe
       end
     end
 
-    # start by printing the board
+    @mode.set_level(@level)
+    @board.set_mode(@mode)
+
     @board.print_board
-    puts "Enter [0-8]:"
-    # loop through until the game was won or tied
-    until game_is_over(@board.status) || tie(@board.status)
-      get_human_spot
-      if !game_is_over(@board.status) && !tie(@board.status)
-        eval_board
-      end
-      @board.print_board
-    end
-    puts @board.get_the_winner(@board.status)
+    @mode.loop_steps(@board)
+    puts @board.get_the_winner
     puts "Game Finished"
-  end
-
-  def get_human_spot
-    spot = nil
-    until spot
-      spot = check_valid_input
-      if @board.status[spot] != "X" && @board.status[spot] != "O"
-        @board.set(spot, @hum)
-      else
-        spot = nil
-      end
-    end
-  end
-
-  def eval_board
-    spot = nil
-    until spot
-      if @board.status[4] == "4"
-        spot = 4
-        @board.set(spot, @com)
-      else
-        spot = @level.get_best_move(@board, @com)
-        if @board.status[spot] != "X" && @board.status[spot] != "O"
-          @board.set(spot, @com)
-        else
-          spot = nil
-        end
-      end
-    end
-  end
-
-  def game_is_over(b)
-    @board.get_game_over(b)
-  end
-
-  def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
-  end
-
-  def check_valid_input
-    # spot = gets.chomp
-    spot = STDIN.gets.chomp
-    if valid_input?(spot)
-      return spot.to_i
-    end
-    puts "Inválid input. Enter numbers between 0 and 8."
-    spot.to_i
-  end
-
-  def valid_input?(input)
-    /^\d{1}$/ === input
   end
 
 end
