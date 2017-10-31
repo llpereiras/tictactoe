@@ -25,6 +25,7 @@ class Tictactoe
         @level = Easy.new
       when 3
         @mode = CpuCpu.new
+        @level = Hard.new
       end
 
     end

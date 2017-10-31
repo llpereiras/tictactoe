@@ -15,7 +15,7 @@ module Rules
     column = get_the_colums_winner(self.status)
     x_winner = 'You loose. Try again!'
     o_winner = 'Congratulation!!! You Win.'
-    if self.mode.class == PlayerPlayer
+    if self.mode.class == PlayerPlayer || self.mode.class == CpuCpu
       o_winner = "The player #{Colorize.print(self.player_one) } is the Winner"
       x_winner = "The player #{Colorize.print(self.player_one) } is the Winner"
     end
