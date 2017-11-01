@@ -29,7 +29,26 @@ ruby tictactoe.rb
 
 # Jogando
 
+### Escolha o modo de jogo
+![choose_mode](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/choose_mode.png)
 
+### Escolha a dificuldade para o modo Player X Cpu
+![choose_level](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/choose_level.png)
+
+### O Tabuleiro
+![board](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/board.png)
+
+### Jogadas
+![steps](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/steps.png)
+
+### Empate
+![draw_game](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/draw_game.png)
+
+### Vitória
+![win_game](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/win_game.png)
+
+### Derrota
+![loose_game](https://raw.githubusercontent.com/llpereiras/tictactoe/master/playing/loose_game.png)
 
 
 # Próximas melhorias
